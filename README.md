@@ -1,93 +1,28 @@
-# AI-EBPL-Supply-chain-management-
-# supply_chain.py
+Supply Chain Inventory Monitor & AI ChatbotThis project is a basic application for monitoring inventory levels in a supply chain and includes a simple, simulated AI chatbot interface. It demonstrates a decoupled architecture using a FastAPI backend to serve data and a Streamlit frontend for the user interface.FeaturesInventory Overview: Displays all items from a dataset, including stock levels and reorder points.Low Stock Alert: Highlights items where the current stock is below the defined reorder level.Manual Data Refresh: Button to manually refresh the inventory data displayed in the frontend.Simulated AI Chatbot: A basic chat interface within the Streamlit app that provides simple, rule-based responses related to inventory and SCM concepts. (Note: This version uses simulated responses; integration with a real AI model requires further development).Project Structurescm_ai/
 
-class Product:
-    def __init__(self, pid, name, quantity):
-        self.pid = pid
-        self.name = name
-        self.quantity = quantity
+├── backend/
+│   ├── __init__.py       # Marks backend as a Python package
+│   ├── main.py           # FastAPI application code
+│   └── data/
+│       └── inventory.csv   # Your dataset file
+├── frontend/
+│   ├── __init__.py       # Marks frontend as a Python package
+│   └── app.py            # Streamlit application code
+├── requirements.txt      # Lists project dependencies
+└── README.md             # Project description and instructions
 
-    def __str__(self):
-        return f"ID: {self.pid}, Name: {self.name}, Quantity: {self.quantity}"
+Setup and InstallationClone or download the project files:Ensure you have the project structure and files (backend/main.py, backend/data/inventory.csv, frontend/app.py, requirements.txt) in a directory named scm_ai.Navigate to the project directory:cd scm_ai
 
+Create a virtual environment (highly recommended):python -m venv venv
 
-class Supplier:
-    def __init__(self, sid, name, contact):
-        self.sid = sid
-        self.name = name
-        self.contact = contact
+Activate the virtual environment:On Windows:venv\Scripts\activate
 
-    def __str__(self):
-        return f"ID: {self.sid}, Name: {self.name}, Contact: {self.contact}"
+On macOS/Linux:source venv/bin/activate
 
+Install dependencies:Make sure you have the requirements.txt file in the root directory (scm_ai/).pip install -r requirements.txt
 
-class SupplyChainManager:
-    def __init__(self):
-        self.products = {}
-        self.suppliers = {}
+Ensure your dataset is in place:Verify that your inventory.csv file is located at scm_ai/backend/data/inventory.csv.Running the ApplicationThis application requires both the backend and the frontend to be running simultaneously.Run the Backend (FastAPI with Uvicorn):Open your terminal, navigate to the scm_ai directory, activate your virtual environment, and run:uvicorn backend.main:app --reload
 
-    def add_product(self, pid, name, quantity):
-        self.products[pid] = Product(pid, name, quantity)
-        print("Product added.")
+This will start the FastAPI server, typically on http://127.0.0.1:8000. The --reload flag allows the server to restart automatically when you make changes to the backend code. Keep this terminal window open.Run the Frontend (Streamlit):Open a new terminal window or tab, navigate to the scm_ai directory, activate your virtual environment, and run:streamlit run frontend/app.py
 
-    def update_inventory(self, pid, quantity):
-        if pid in self.products:
-            self.products[pid].quantity += quantity
-            print("Inventory updated.")
-        else:
-            print("Product not found.")
-
-    def add_supplier(self, sid, name, contact):
-        self.suppliers[sid] = Supplier(sid, name, contact)
-        print("Supplier added.")
-
-    def list_inventory(self):
-        print("Inventory:")
-        for product in self.products.values():
-            print(product)
-
-    def list_suppliers(self):
-        print("Suppliers:")
-        for supplier in self.suppliers.values():
-            print(supplier)
-
-
-def main():
-    scm = SupplyChainManager()
-    while True:
-        print("\n1. Add Product\n2. Update Inventory\n3. Add Supplier\n4. List Inventory\n5. List Suppliers\n6. Exit")
-        choice = input("Select an option: ")
-
-        if choice == "1":
-            pid = input("Product ID: ")
-            name = input("Product Name: ")
-            quantity = int(input("Quantity: "))
-            scm.add_product(pid, name, quantity)
-
-        elif choice == "2":
-            pid = input("Product ID: ")
-            quantity = int(input("Quantity to Add/Subtract: "))
-            scm.update_inventory(pid, quantity)
-
-        elif choice == "3":
-            sid = input("Supplier ID: ")
-            name = input("Supplier Name: ")
-            contact = input("Contact Info: ")
-            scm.add_supplier(sid, name, contact)
-
-        elif choice == "4":
-            scm.list_inventory()
-
-        elif choice == "5":
-            scm.list_suppliers()
-
-        elif choice == "6":
-            print("Exiting...")
-            break
-
-        else:
-            print("Invalid choice. Try again.")
-
-
-if __name__ == "__main__":
-    main()
+This will start the Streamlit application and open it in your web browser, typically at http://localhost:8501.You should now see the Streamlit application displaying the inventory data and the chatbot interface.Future EnhancementsIntegrate a Real AI Model: Connect the chatbot backend to a real Large Language Model (LLM) like Gemini, OpenAI's GPT, etc., to provide more intelligent and context-aware responses. This would likely involve adding API call logic to the FastAPI backend.Add More Data: Include historical sales data, lead times, supplier information, costs, etc., to enable more advanced SCM analysis.Implement Advanced SCM Logic:Demand Forecasting (using time series models).Optimal Reorder Quantity/Point calculations.Supplier Performance Monitoring.Inventory Optimization algorithms.Improve Frontend UI: Add charts, graphs, and more interactive elements using Streamlit or other frontend libraries.Authentication and Authorization: Secure the application if used in a multi-user environment.Deployment: Deploy the backend and frontend to cloud platforms (e.g., Heroku, AWS, Google Cloud) for wider access.
