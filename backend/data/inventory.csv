@@ -1,0 +1,11 @@
+item_id,item_name,stock,reorder_level
+1,Gearbox,50,20
+2,Sensors,100,30
+3,Motor,40,15
+4,Capacitor,10,25
+5,IC 555 Timer,5,10
+6,PCB Board,80,50
+7,Transistors,200,100
+8,Microcontroller,12,20
+9,Battery Pack,8,15
+10,Resistors,500,300
