@@ -1,3 +1,4 @@
+IBM Supply chain management
 Supply Chain Inventory Monitor & AI ChatbotThis project is a basic application for monitoring inventory levels in a supply chain and includes a simple, simulated AI chatbot interface. It demonstrates a decoupled architecture using a FastAPI backend to serve data and a Streamlit frontend for the user interface.FeaturesInventory Overview: Displays all items from a dataset, including stock levels and reorder points.Low Stock Alert: Highlights items where the current stock is below the defined reorder level.Manual Data Refresh: Button to manually refresh the inventory data displayed in the frontend.Simulated AI Chatbot: A basic chat interface within the Streamlit app that provides simple, rule-based responses related to inventory and SCM concepts. (Note: This version uses simulated responses; integration with a real AI model requires further development).Project Structurescm_ai/
 
 ├── backend/
